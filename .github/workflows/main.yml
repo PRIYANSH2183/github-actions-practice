@@ -1,4 +1,4 @@
-name: My Workflow
+name: Final Workflow
 
 on:
   push:
@@ -6,13 +6,24 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
+
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Print Hello
         run: echo "Hello from Job 1"
+
+      - name: List files
+        run: ls
 
   job2:
     runs-on: ubuntu-latest
     needs: job1
+
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Print Bye
         run: echo "Bye from Job 2"
