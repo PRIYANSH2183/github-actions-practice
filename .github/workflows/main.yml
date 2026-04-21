@@ -1,20 +1,24 @@
-name: Node Setup Workflow
+name: User actions
 
-on:
-  push:
+on: push
 
 jobs:
-  test:
+
+  job1:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
+      - name: Run something
+        run: echo "Job1 is running"
 
-      - name: Check Node version
-        run: node -v
+  job2:
+    runs-on: ubuntu-latest
+
+    needs: job1   # 👈 IMPORTANT (dependency)
+
+    steps:
+      - name: Run after job1
+        run: echo "Job2 runs only if Job1 succeeds"
